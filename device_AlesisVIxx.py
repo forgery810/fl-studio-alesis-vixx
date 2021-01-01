@@ -1,5 +1,5 @@
 # name=Alesis VIxx                     
-# Author: Tyson Schwertner
+# Author: ts-forgery
 # Version 0.1
 
 #This program was designed using an Alesis VI61. It should work on the VI25 and VI49 as all switches used have 
