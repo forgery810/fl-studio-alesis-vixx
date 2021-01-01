@@ -10,7 +10,7 @@ A MIDI-script for use with the Alesis VI-series keyboards in conjunction with FL
 
 ## Notes:
 
-- This has only been tested on a VI61 on Windows but the switches should correlate with the attached image with the other models. Please let me know if you have any issues.\
+- This has only been tested on a VI61 on Windows but the switches should correlate with the attached image with the other models. Please let me know if you have any issues.
 
 - See the .jpg file for the layout of buttons.
 
