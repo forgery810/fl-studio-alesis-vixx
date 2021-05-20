@@ -8,6 +8,8 @@ A MIDI-script for use with the Alesis VI-series(*) keyboards in conjunction with
 
 - In FL studio under Options/MIDI settings, select the VI61 (or 25/49)(*) under Input. Select "Controller Type" and in the right hand corner you should see the Alesis VIxx option
 
+- This is a video that goes though the setup which may be helpful. https://www.youtube.com/watch?v=eP1-_sq_Y
+
 ## Notes:
 
 - (*) This has only been tested on a VI61 in Windows but the switches should correlate with the other models. Please let me know if you have any issues.
