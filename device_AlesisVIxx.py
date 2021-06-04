@@ -2,10 +2,11 @@
 # Author: ts-forgery
 # Version 0.1
 
-#This program was designed using an Alesis VI61. It should work on the VI25 and VI49 as all switches used have 
-#the same MIDI CC number attached based on their position starting from the left of each row. The standard mapping 
-#of CC numbers is used but I advise users to change all switches to from CC Toggle to CC Momentary otherwise you will 
-#have to press switches twice.
+#This program was designed using an Alesis VI61. It should work on the VI25 and VI49.
+#In the orignal Alesis layout there is a conflict between the sustain pedal CC and switch 17, both of which will open a new pattern. 
+#You can use the included .vi6 file for the VI61, .vi4 for the 49 and .vi2 for the 25 key version to update the layout with the Alesis software.
+#These files also change the switches from toggle to momentary, which eliminates the need to push each button twice.
+
 
 import transport
 import midi
