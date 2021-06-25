@@ -43,8 +43,7 @@ button = {
 	"view_mixer": 85,
 	"view_plugin_picker": 86,
 	"pad_mode_toggle": 87,
-	"pad_one": 60,
-
+	
 }
 
 mode = {
