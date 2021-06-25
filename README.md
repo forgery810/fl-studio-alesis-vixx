@@ -5,7 +5,7 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
 ## Installation
 
 - Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/
-- 
+
 - The data.py must be in same folder with the device_alesis... py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
 
 - In FL studio under Options/MIDI settings, select the VI61 (or 25/49)(+) under Input. Select "Controller Type" and in the right hand corner you should see the Alesis VIxx option
