@@ -1,11 +1,14 @@
 # name=Alesis VIxx                     
 # Author: ts-forgery
-# Version 0.1
+# Version 0.15
 
-#This program was designed using an Alesis VI61. It should work on the VI25 and VI49.
-#In the orignal Alesis layout there is a conflict between the sustain pedal CC and switch 17, both of which will open a new pattern. 
-#You can use the included .vi6 file for the VI61, .vi4 for the 49 and .vi2 for the 25 key version to update the layout with the Alesis software.
-#These files also change the switches from toggle to momentary, which eliminates the need to push each button twice.
+# version 0.15 - changed button 33 on the vi61 from CC 64 to CC 99 to remove conflict with sustain pedal. Corresponding map layouts are uploaded although vi25 
+# and vi49 remain untested. 
+
+
+# This program was designed using an Alesis VI61. It should work on the VI25 and VI49.
+# You can use the included .vi6 file for the VI61, .vi4 for the 49 and .vi2 for the 25 key version to update the layout with the Alesis software.
+# These files also change the switches from toggle to momentary, which eliminates the need to push each button twice.
 
 
 import transport
@@ -30,17 +33,17 @@ switch = {
 	"up": 51,
 	"rotate_window": 52,
 	"pattern_down": 53,	
-	"pattern_up": 54,
-	"new_pattern": 64,					
-	#Second row of switches 
+	"pattern_up": 54,				
+	#Second row of switches
+	"new_pattern": 99,	
 	"enter": 65,
 	"left": 66,
 	"down": 67,
 	"right": 68,
 	"open_channel_plugin": 69,
 	"open_channel_sampler": 70,
+	#Third row of switches	
 	"song_mode_toggle": 80,
-	#Third row of switches				
 	"overdub": 81,
 	"view_playlist": 82,
 	"view_piano_roll": 83,
