@@ -1,6 +1,6 @@
 # name=Alesis VIxx1betaInprogress3
 # Author: ts-forgery
-# Version 0.3
+# Version 0.5.1
 
 #This program was designed using an Alesis VI61. It should work on the VI25 and VI49 as all buttons used have 
 #the same MIDI CC number attached based on their position starting from the left of each row. The standard mapping 
@@ -155,9 +155,15 @@ def  OnMidiMsg(event):
 			
 			elif event.data1 == button["enter"]:
 				if browser_focused:
+					print("Select Browser Item")
 					ui.selectBrowserMenuItem()		
 					event.handled = True
-
+				elif channels_focused:
+					print("Toggle Mute Channel")
+					channels.muteChannel(current_channel)
+				elif mixer_focused:
+					print("Mute Track")
+					mixer.muteTrack(mixer.trackNumber())
 				else:
 					print('enter')
 					ui.enter()
