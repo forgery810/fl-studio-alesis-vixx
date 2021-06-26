@@ -28,7 +28,7 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
 ##       Mixer Mode
  
 -  When the mixer is focused again the mod wheel will scroll through the tracks. Mute and solo will work accordingly. The knobs will control the track level for each initially.
-   If the master track is highligthed the first knob will control master and the second knob will control the first track etc but will revert back to the standard setup once        another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will      change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. Mute mode makes the buttons of the first row mute their      repsective track. (This mode will likely be removed in a later version or replaced with control over record arming.)
+   If the master track is highligthed the first knob will control master and the second knob will control the first track etc but will revert back to the standard setup once        another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will      change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. Mute mode makes the buttons of the first row mute their      respsective track. (This mode will likely be removed in a later version or replaced with control over record arming.)
 
 ##       Channel Mode
 
@@ -40,11 +40,11 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
   ##        Step Sequencer Mode
   
   - In step sequencer mode the channels can be selected and the pads will add or remove steps accordingly. The step mode options button above the pad option button now rotates 
-    through the various step parameters - pitch, velocity, release, fine pitch, panning, x value, and y value. The knobs will control the parmater value for each step of the         current track. Release seems to have no effect in my experience. Shift does not function well currently so it is not included.
+    through the various step parameters - pitch, velocity, release, fine pitch, panning, x value, and y value. The knobs will control the parmater value for each step of the         current track. Release seems to have no effect. Shift does not function well currently so it is not included.
     
 ## Broswer Mode
 
-- The browser must be detached (for some unknown reason) for this mode to work. Selecting the browser button allow the directional keys to control the selection of samples.       Right opens folders and left closes them. Enter will bring up the menu for what to do with the selection. Unfortunatley, when selecting open in new channel the browser loses     focus because the channel window open so the browser button must be pushed again. It is a little more cumbersome than preferred but is functional.
+- The browser must be detached (for an unknown reason) for this mode to work. Selecting the browser button allow the directional keys to control the selection of samples.       Right opens folders and left closes them. Enter will bring up the menu for what to do with the selection. Unfortunatley, when selecting open in new channel the browser loses     focus because the channel window open so the browser button must be pushed again. It is a little more cumbersome than preferred but is functional.
   
 
  ## vi25 and vi49 Users
