@@ -1,16 +1,16 @@
 |   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |        <---- first row
  -------       -------       -------       -------       -------       -------      -------       -------
  
-  undo        metronome        esc            up         browser       rotate      step edit
+  undo        metronome        esc            up         browser       rotate      step rec        save
                                                                        window 
   
  
 |   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |        <---- second row
  -------       -------       -------       -------       -------       -------      -------       -------
-               enter/                                                                              rotate 
-  solo         toggle         left           down        right                     open chan      mix/step
-              mute tracks/                                                                         options
-               channels
+                                                                         +                        rotate 
+  solo          enter          left           down        right         knob       open chan      mix/step
+                                                                        range                     options
+               
  
 |   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |        <---- third row
  -------       -------       -------       -------       -------       -------      -------       -------
