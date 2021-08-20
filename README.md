@@ -29,15 +29,15 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
 
 ##       Mixer Mode
  
--  When the mixer is focused again the mod wheel will scroll through the tracks. Mute and solo will work accordingly. The knobs will control the track level for each initially.
-   If the master track is highligthed the first knob will control master and the second knob will control the first track etc but will revert back to the standard setup once        another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will      change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. Mute mode makes the buttons of the first row mute their      respsective track. (This mode will likely be removed in a later version or replaced with control over record arming.)
+-  When the mixer is focused again the mod wheel will scroll through the tracks. Enter toggles mute for the selected channel and solo works as expected. The knobs will control the track level for corresponding track.
+   If the master track is highlighted any knob will control the master volume but will revert back to the standard setup once another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. 
 
 ##      Channel Mode
 
 - When the channel window is focused, the mod wheel controls channel selection. As with the mixer, mute and solo work as well as the knob control over channel volume. 
 
 - Pressing the pad mode button will rotate through the pad options. Standard plays the selected channels notes as expected. Step mode controls the selected channel as a 
-  16 step sequencer. In channel mode each pad individually controls up to the first 16 channels.
+  16 step sequencer. In pad per channel mode each pad individually controls up to the first 16 channels.
   
   ##       - Step Sequencer Mode
   
@@ -46,7 +46,7 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
     
 ## Broswer Mode
 
-- The browser must be detached (for an unknown reason) for this mode to work. Selecting the browser button allow the directional keys to control the selection of samples.       Right opens folders and left closes them. Enter will bring up the menu for what to do with the selection. Unfortunatley, when selecting open in new channel the browser loses     focus because the channel window open so the browser button must be pushed again. It is a little more cumbersome than preferred but it is functional.
+-  Selecting the browser button allow the directional keys to control the selection of samples. Right opens folders and left closes them. Enter will bring up the menu for what to do with the selection. Unfortunatley, when selecting open in new channel the browser loses focus because the channel window open so the browser button must be pushed again. Selecting the browser button again will close the browser window but it cannot be opened again, unfortunately, without using the mouse. This functionality is a little cumbersome, unfortunately but can still be useful.
   
 
  ## vi25 and vi49 Users
