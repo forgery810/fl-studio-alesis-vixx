@@ -1,4 +1,6 @@
 
+plugin_names = ["Transistor Bass", "Fruity granulizer", "Fruity Reeverb 2", "Fruity Love Philter", "3x Osc", "FLEX", "PLUCKED!", "Surrealistic MG-1 Plus", "GMS", "ToxicBiohazard", "Drumpad", "Sawer", "Polygon2", "Pigments", "Fruity DX10"]
+
 
 button = {
 
@@ -20,7 +22,7 @@ button = {
 	"up": 51,
 	"browser": 52,
 	"rotate_window": 53,				
-	"step_editor": 54,
+	"step_rec": 54,
 	"blank_three": 55,
 	
 				
@@ -30,7 +32,7 @@ button = {
 	"left": 66,
 	"down": 67,
 	"right": 68,	
-	"blank_four": 69,
+	"offset_range": 69,
 	"open_channel_sampler": 70,
 	"step_parameter": 71,
 
@@ -43,7 +45,9 @@ button = {
 	"view_mixer": 85,
 	"view_plugin_picker": 86,
 	"pad_mode_toggle": 87,
-	
+	"save": 55,
+
+
 }
 
 mode = {
@@ -84,3 +88,6 @@ knob = {
 	"knob_fifteen": 34,
 	"knob_sixteen": 35,
 }
+
+
+						
