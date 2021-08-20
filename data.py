@@ -1,5 +1,4 @@
 
-plugin_names = ["Transistor Bass", "Fruity granulizer", "Fruity Reeverb 2", "Fruity Love Philter", "3x Osc", "FLEX", "PLUCKED!", "Surrealistic MG-1 Plus", "GMS", "ToxicBiohazard", "Drumpad", "Sawer", "Polygon2", "Pigments", "Fruity DX10"]
 
 
 button = {
