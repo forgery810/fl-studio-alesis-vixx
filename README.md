@@ -12,6 +12,8 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
 
 - Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-10. The same with mixer muting, mixer volume, panning and channel volume. 
 
+- The .vi2/.vi4/.vi6 files labeled for version 0.5 will work with 1.0.
+
 ## Manual
 
 -  Note the data.py file for button functions. Most of this is self explanatory. A number of the functions are dependent on which window is focused. 
