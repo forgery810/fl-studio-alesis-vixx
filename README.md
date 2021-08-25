@@ -56,7 +56,7 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
 
 - The double arrow buttons that usually control the pattern number will rotate through plugin presets. This will not work with "internal" presets, as found in older FL Studio plugins. It will work with presets saved under the plugin option arrow in the window. For example, Flex and Ogun work outright but in Poizone the presets within the plugin itself will not rotate so you will have to save the ones you want using the window option.  
 
- ## vi25 and vi49 Users
+ ## VI25 and VI49 Users
  
  - Extra layouts are included for these two formats. The second layout will allow control over the steps, channels and tracks 9-16. These two presets should be uploaded in slots
    right next to each other so they can be quickly rotated between.
