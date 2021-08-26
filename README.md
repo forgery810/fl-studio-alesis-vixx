@@ -18,7 +18,7 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 ## Manual
 
--  Note the data.py file for button functions. Most of this is self explanatory. A number of the functions are dependent on which window is focused. 
+-  Note the layout file for button functions. Most of this is self explanatory. A number of the functions are dependent on which window is focused.  
 
 -  Selecting patterns has moved to the transport section and is controlled by the double arrows either direction. The new pattern button has been eliminated.
 
@@ -28,13 +28,15 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 - The enter button is mode dependent. In channel and mixer mode it will toggle the muting of the selected track/channel. In browser mode it will allow the selection and
   assignment of samples and plugins. 
   
-- The + knob range button changes the tracks and channels that the knobs can access and the steps the pads can. The button will rotate through ranges 1-16, 17-32, 33-48, and 48-   64. This number of ranges can be reduced will some simple code changes if desired for simplicity.
+- The + knob range button changes the tracks and channels that the knobs can access and the steps the pads can. The button will rotate through ranges 1-16, 17-32, 33-48, and 48-     64. This number of ranges can be reduced will some simple code changes if desired for simplicity.
+
+- The mouse should be moved to a neutral section of the FL layout. If it is over a knob or step, for example, the text on the top left will not display info necessary to know       which mode you are in.
 
 
 ##       Mixer Mode
  
 -  When the mixer is focused again the mod wheel will scroll through the tracks. Enter toggles mute for the selected channel and solo works as expected. The knobs will control the track level for corresponding track.
-   If the master track is highlighted any knob will control the master volume but will revert back to the standard setup once another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. 
+   If the master track is highlighted any knob will control the master volume but will revert back to the standard setup once another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. Knob/Range can increase the track number the knobs control. 
 
 ##      Channel Mode
 
@@ -46,11 +48,13 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
   ##       - Step Sequencer Mode
   
   - In step sequencer mode the channels can be selected and the pads will add or remove steps accordingly. The step mode options button above the pad option button now rotates 
-    through the various step parameters - pitch, velocity, release, fine pitch, panning, x value, and y value. The knobs will control the parmater value for each step of the         current track. Release seems to have no effect. Shift does not function well currently so it is not included.
+    through the various step parameters - pitch, velocity, release, fine pitch, panning, x value, and y value. The knobs will control the parmater value for each step of the         current track. Release seems to have no effect. Shift does not function well currently so it is not included. 
+    
+  - The knob/range button will increase the steps the pads and knobs control by 16 with each push. Up to 64 steps can be contorlled this way.
     
 ## Broswer Mode
 
--  Selecting the browser button allow the directional keys to control the selection of samples. Right opens folders and left closes them. Enter will bring up the menu for what to do with the selection. Unfortunatley, when selecting open in new channel the browser loses focus because the channel window open so the browser button must be pushed again. Selecting the browser button again will close the browser window but it cannot be opened again, unfortunately, without using the mouse. This functionality is a little cumbersome, unfortunately but can still be useful.
+-  Selecting the browser button will allow the directional keys to control the selection of samples. Right opens folders and left closes them. Enter will bring up the menu for what to do with the selection. Unfortunatley, when selecting open in new channel the browser loses focus because the channel window open so the browser button must be pushed again. Selecting the browser button again will close the browser window but it cannot be opened again, unfortunately, without using the mouse. This functionality is a little cumbersome unfortunately, but can still be useful.
   
 ## Plugins
 
@@ -61,7 +65,7 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
  ## VI25 and VI49 Users
  
  - Extra layouts are included for these two formats. The second layout will allow control over the steps, channels and tracks 9-16. These two presets should be uploaded in slots
-   right next to each other so they can be quickly rotated between.
+   right next to each other so they can be quickly rotated between. In the case of the VI25, the first layout will control steps/tracks 1-8 and the second will control 9-16. If the range is increased, then the first layout will control 17-22 and the second 28-32, etc.
   
 
 ## Notes:
