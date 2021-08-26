@@ -2,6 +2,8 @@
 
 A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with FL Studio
 
+Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
+
 ## Installation
 
 - Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/
