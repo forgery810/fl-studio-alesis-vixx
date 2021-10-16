@@ -1,4 +1,4 @@
-# name=Alesis VIxx-1.00
+# name=Alesis VIxx-1.01
 # Author: ts-forgery
 # Version 1.00
 
@@ -7,6 +7,7 @@
 #of CC numbers is used but I advise users to change all buttons to from CC Toggle to CC Momentary otherwise you will 
 #have to press buttons twice.
 
+# 1.01 update - eliminated plugin_name bug
 
 #
 # eliminate button/sustain conflict while preserving sustain
