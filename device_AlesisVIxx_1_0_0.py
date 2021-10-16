@@ -7,7 +7,7 @@
 #of CC numbers is used but I advise users to change all buttons to from CC Toggle to CC Momentary otherwise you will 
 #have to press buttons twice.
 
-# version 0.5
+
 #
 # eliminate button/sustain conflict while preserving sustain
 # changed pattern control to arrow buttons in transport control section of keyboard
