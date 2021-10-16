@@ -1,6 +1,6 @@
 # name=Alesis VIxx-1.01
 # Author: ts-forgery
-# Version 1.00
+# Version 1.01
 
 #This program was designed using an Alesis VI61. It should work on the VI25 and VI49 as all buttons used have 
 #the same MIDI CC number attached based on their position starting from the left of each row. The standard mapping 
