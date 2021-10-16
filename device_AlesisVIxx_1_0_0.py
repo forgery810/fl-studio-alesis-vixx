@@ -28,7 +28,7 @@ import plugins
 import mixer
 import device
 import patterns
-from data import button, mode, parameters, knob, plugin_names
+from data import button, mode, parameters, knob
 from midi import *
 
 if device.isAssigned():					# check if device assigned. not currently used
