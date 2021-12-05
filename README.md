@@ -8,7 +8,7 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 - Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/
 
-- The data.py must be in same folder with the device_AlesisVIxx_1_0_0.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
+- The data.py must be in same folder with the device_AlesisVIxx_1_0_2.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
 
 - In FL studio under Options/MIDI settings, select the VI61 (or 25/49)(+) under Input. Select "Controller Type" and in the right hand corner you should see the Alesis VIxx option. IMPORTANT: MIDIIN2 must be disabled. Only enable VI61 under the Input settings.
 
