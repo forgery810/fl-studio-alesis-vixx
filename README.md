@@ -6,6 +6,8 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 ## Installation
 
+- Midi-scripts were introduced with FL Studio 20.7.1 and will not work on previous versions.
+
 - Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/
 
 - The data.py must be in same folder with the device_AlesisVIxx_1_0_2.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
@@ -15,6 +17,7 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 - Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-16. The same with mixer muting, mixer volume, panning and channel volume. 
 
 - The .vi2/.vi4/.vi6 files labeled for version 0.5 will work with 1.0.
+
 
 ## Manual
 
