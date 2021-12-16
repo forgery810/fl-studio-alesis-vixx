@@ -6,7 +6,7 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 ## Installation
 
-- Midi-scripts were introduced with FL Studio 20.7.1 and will not work on previous versions.
+- Midi-scripts were introduced with FL Studio 20.7.1. Update to the latest version of FL Studio before installing. Some conflicts may occur in 20.7.x versions in particular. 
 
 - Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/
 
