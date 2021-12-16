@@ -34,7 +34,7 @@ from data import button, mode, parameters, knob
 from midi import *
 
 if device.isAssigned():					# check if device assigned. not currently used
-	print("Device assigned - ver 1.00")
+	print("Device assigned - ver 1.02")
 	print(device.getName())
 	print(device.getPortNumber())
 
