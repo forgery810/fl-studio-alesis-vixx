@@ -4,11 +4,13 @@ A MIDI-script for use with the Alesis VI-series(+) keyboards in conjunction with
 
 Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
+Image Line forum entry for this script: https://forum.image-line.com/viewtopic.php?f=1994&t=247069
+
 ## Installation
 
 - Midi-scripts were introduced with FL Studio 20.7.1. Update to the latest version of FL Studio before installing. Some conflicts may occur in 20.7.x versions in particular. 
 
-- Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/
+- Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/  (not just the files, they need to be within their own folder here)
 
 - The data.py must be in same folder with the device_AlesisVIxx_1_0_2.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
 
@@ -68,8 +70,18 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
  ## VI25 and VI49 Users
  
  - Extra layouts are included for these two formats. The second layout will allow control over the steps, channels and tracks 9-16. These two presets should be uploaded in slots
-   right next to each other so they can be quickly rotated between. In the case of the VI25, the first layout will control steps/tracks 1-8 and the second will control 9-16. If the range is increased, then the first layout will control 17-22 and the second 28-32, etc.
+   right next to each other so they can be quickly rotated between. In the case of the VI25, the first layout will control steps/tracks 1-8 and the second will control 9-16. If    the range is increased, then the first layout will control 17-22 and the second 28-32, etc.
   
+## Troubleshooting
+
+- Update FL Studio before you do anything else. If you are on a cracked copy of FL Studio, please do not ask for help with any problems.
+
+- Most problems have arisen from the folder not being in the right location and the data.py not being present.
+
+- Make sure user data folder is set to the default location \Documents\Image Line. If you have it set elsewhere and want to keep it that way, clone the folder to the corresponding place ...\Settings\Hardware
+
+- If you are still having an issue, on FL Studio go to View - Script Output, hit a few buttons on the Alesis and copy what it there. Then create an issue on github or respond on the Image Line forum entry (link above) for this controller. Describe the issue and paste the results from the Script Output.
+
 
 ## Notes:
 
