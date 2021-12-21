@@ -56,6 +56,8 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
     through the various step parameters - pitch, velocity, release, fine pitch, panning, x value, and y value. The knobs will control the parmater value for each step of the         current track. Release seems to have no effect. Shift does not function well currently so it is not included. 
     
   - The knob/range button will increase the steps the pads and knobs control by 16 with each push. Up to 64 steps can be contorlled this way.
+
+  - Currently, this only functions when al channels are shown. If some are hidden in groups, it will not work.
     
 ## Broswer Mode
 
