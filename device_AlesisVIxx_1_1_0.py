@@ -1,6 +1,6 @@
-# name=Alesis VIxx-1.02
+# name=Alesis VIxx-1.10
 # Author: ts-forgery
-# Version 1.02
+# Version 1.10
 
 #This program was designed using an Alesis VI61. It should work on the VI25 and VI49 as all buttons used have 
 #the same MIDI CC number attached based on their position starting from the left of each row. The standard mapping 
@@ -9,17 +9,11 @@
 
 # 1.01 update - eliminated plugin_name bug
 # 1.02 update - fixed f-string conflicts with FL Studio
+# 1.10 update - added random pattern generator
+#				added quick quantize button
+#				added button to link mixer/channel
+#				record, loop, overdub, metronome buttons now stay lit when active
 
-#
-# eliminate button/sustain conflict while preserving sustain
-# changed pattern control to arrow buttons in transport control section of keyboard
-# eliminated new pattern button 
-# mod wheel controls track and channel selection
-# added focused dependent controls including mixer volume, panning control
-# mixer track mute option
-# added value pick-up knobs so knob must match value before it is engaged
-# added pad modes - step sequencer and channel control
-# added per step value controls for pitch, mod x , mod y  
 
 import arrangement
 import transport
@@ -32,20 +26,22 @@ import device
 import patterns
 from data import button, mode, parameters, knob
 from midi import *
+import _random
 
 if device.isAssigned():					# check if device assigned. not currently used
-	print("Device assigned - ver 1.02")
+	print("Device assigned - ver 1.10")
 	print(device.getName())
 	print(device.getPortNumber())
 
 else:
-	print("Not assigned - ver 1.00")
+	print("Not assigned - ver 1.10")
 
 mixer_num = 0 				# for toggling mixer modes
 proceed = False        			# stores bool value to decide if knob can change values
 mode_toggle = 0				# for toggling pad mode
 parameter = 0 				# step sequencer parameters
 offset_iter = 0
+
 
 def  OnMidiMsg(event):
 
@@ -56,6 +52,10 @@ def  OnMidiMsg(event):
 	global offset
 	global offset_iter
 	global mixer_num
+
+
+	
+	rec_status = 0
 
 	current_pattern = patterns.patternNumber()
 	current_channel = channels.channelNumber()
@@ -94,7 +94,28 @@ def  OnMidiMsg(event):
 
 	if event.midiId == midi.MIDI_CONTROLCHANGE:
 
-		if event.data2 > 0:
+		if event.data1 == button["record"]:			# This section is for button with leds that toggle on/off
+				print('Record')
+				transport.record()
+				event.handled = True
+
+		elif event.data1 == button["set_metronome"]:
+			print('Set Metronome')
+			transport.globalTransport(midi.FPT_Metronome, 110)
+			event.handled = True
+
+		elif event.data1 == button["overdub"]:					
+			print('Toggle Overdub Mode')
+			transport.globalTransport(midi.FPT_Overdub, 112)
+			event.handled = True
+
+		elif event.data1 == button["loop"]:						
+			print('Toggle Loop Record Mode')
+			transport.globalTransport(midi.FPT_LoopRecord, 113)
+			event.handled = True
+
+		if event.data2 > 0:							# This section is for button with leds that do not toggle
+
 			
 			if event.data1 in knob.values():
 				print(ui.getFocusedPluginName())
@@ -106,7 +127,9 @@ def  OnMidiMsg(event):
 					event.handled = True
 
 				elif ui.getFocused(5):
-					knobbb.plugin_control()
+					if plugins.isValid(channels.channelNumber()):
+						knobbb.plugin_control()
+						print('valid plugin')
 
 				else:
 					knobbb.knob_turn()
@@ -119,6 +142,7 @@ def  OnMidiMsg(event):
 				ui.setHintMsg(mode[mode_toggle])
 
 																		# Transport controls
+			
 			elif event.data1 == button["play"]:			
 				transport.start()
 				event.handled = True
@@ -134,10 +158,10 @@ def  OnMidiMsg(event):
 				transport.stop()
 				event.handled = True						
 																		
-			elif event.data1 == button["record"]:			
-				print('Record')
-				transport.record()
-				event.handled = True
+			# elif event.data1 == button["record"]:			
+			# 	print('Record')
+			# 	transport.record()
+			# 	event.handled = True
 
 			elif event.data1 == button["pattern_down"]:
 				if ui.getFocused(5):
@@ -159,15 +183,8 @@ def  OnMidiMsg(event):
 					transport.globalTransport(midi.FPT_PatternJog, 1)
 					event.handled = True
 
-			elif event.data1 == button["loop"]:						
-				print('Toggle Loop Record Mode')
-				transport.globalTransport(midi.FPT_LoopRecord, 113)
-				event.handled = True
 
-			elif event.data1 == button["overdub"]:					
-				print('Toggle Overdub Mode')
-				transport.globalTransport(midi.FPT_Overdub, 112)
-				event.handled = True
+
 																		# Set mod wheel to control channels when channels focused and tracks when mixer
 			elif event.data1 == button["mod_wheel"]:					
 				if mixer_focused:
@@ -177,12 +194,7 @@ def  OnMidiMsg(event):
 					print("Channel Number: " + str(current_channel))
 					channels.selectOneChannel(int(round(mapvalues(event.data2, channels.channelCount()-1, 0, 0, 127), 0)))				
 
-			elif event.data1 == button["solo"]:
-				if mixer_focused:
-					mixer.soloTrack(mixer.trackNumber())
-				elif channels_focused:
-					channels.soloChannel(channels.channelNumber())
-				event.handled = True
+
 			
 			elif event.data1 == button["enter"]:
 				if browser_focused:
@@ -250,7 +262,7 @@ def  OnMidiMsg(event):
 
 			elif event.data1 == button["open_channel_sampler"]:			
 				print('Open Sampler Channel')
-				channels.showCSForm(channels.channelNumber(1))
+				channels.showCSForm(channels.channelNumber(1), -1)
 				event.handled = True					
 								
 			elif event.data1 == button["left"]:							
@@ -279,10 +291,7 @@ def  OnMidiMsg(event):
 					device.midiOutMsg(144, 1, 63, 80)
 					event.handled = True
 
-			elif event.data1 == button["set_metronome"]:	
-					print('Set Metronome')
-					transport.globalTransport(midi.FPT_Metronome, 110)
-					event.handled = True
+
 
 			elif event.data1 == button["escape"]:
 				print('Escape')
@@ -318,6 +327,37 @@ def  OnMidiMsg(event):
 					print('Step Editor')
 					transport.globalTransport(midi.FPT_StepEdit, 114)
 					event.handled = True							
+
+			elif event.data1 == button["quantize"]:
+				print('quantize')
+				channels.quickQuantize(channels.channelNumber())
+				event.handled = True
+
+			elif event.data1 == button["link_chan"]:
+				print('link channel')
+				mixer.linkTrackToChannel(0)
+
+			elif event.data1 == button["rand_gen"]:
+				print(patterns.getPatternLength(channels.channelNumber()))
+				for i in range(patterns.getPatternLength(channels.channelNumber())):
+					channels.setGridBit(channels.channelNumber(), i, 0)
+				for z in range((patterns.getPatternLength(channels.channelNumber()))):
+					y = num_gen()
+					print(y)
+					if (y % 2) == 0:
+						print('even')
+						channels.setGridBit(channels.channelNumber(), z, 1)
+					else:
+						print('odd')
+
+				
+
+
+# class Patgen
+
+# 	def __init__(self, pat_len)
+
+
 
 
 class Knob:
@@ -396,6 +436,13 @@ class Knob:
 		print('mapped value')
 		print(mapvalues(self.data_two, 0, 1, 0, 127))
 		plugins.setParamValue(mapvalues(self.data_two, 0, 1, 0, 127), self.data_one - 20, self.channel)
+
+
+def num_gen():
+	rand_obj = _random.Random()
+	rand_obj.seed()
+	rand_int = rand_obj.getrandbits(11) 
+	return rand_int
 
 
 def PlayChannel(note, vel):												
