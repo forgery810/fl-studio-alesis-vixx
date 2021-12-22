@@ -8,15 +8,15 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
 
 ## Installation
 
-- Midi-scripts were introduced with FL Studio 20.7.1. Update to the latest version of FL Studio before installing. Some conflicts may occur in 20.7.x versions in particular. 
+- Update to the latest version of FL Studio before installing. Some conflicts may occur in 20.7.x versions in particular. See troubleshooting below if you have issues. 
 
-- Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/  (not just the files, they need to be within their own folder here)
+- Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/  (put the folder here, not just the files)
 
 - The data.py must be in same folder with the device_AlesisVIxx_1_0_2.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
 
-- In FL studio under Options/MIDI settings, select the VI61 (or 25/49)(+) under Input. Select "Controller Type" and in the right hand corner you should see the Alesis VIxx option. IMPORTANT: MIDIIN2 must be disabled. Only enable VI61 under the Input settings.
+- In FL studio under Options/MIDI settings, with the keyboard connected, select the VI61 (or 25/49)(+) under Input. Select "Controller Type" and in the right hand corner you should see the Alesis VIxx option. IMPORTANT: MIDIIN2 must be disabled. Only enable VI61 under the Input settings.
 
-- Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-16. The same with mixer muting, mixer volume, panning and channel volume. 
+- Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access to everything the VI61 has. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-16. The same with mixer muting, mixer volume, panning and channel volume. 
 
 - The .vi2/.vi4/.vi6 files labeled for version 0.5 will work with 1.0.
 
@@ -25,7 +25,7 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
 
 -  Note the layout file for button functions. Most of this is self explanatory. A number of the functions are dependent on which window is focused.  
 
--  Selecting patterns has moved to the transport section and is controlled by the double arrows either direction. The new pattern button has been eliminated.
+-  Selecting patterns has moved to the transport section and is controlled by the double arrows either direction. The new pattern button has been eliminated from previous versions.
 
 - The mod wheel figures prominently in this setup. It is used to select channels when channel mode is active and tracks when the mixer is active.
   The directional buttons serve the same purpose but the wheel is much easier to use. 
