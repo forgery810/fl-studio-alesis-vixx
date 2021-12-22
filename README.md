@@ -92,7 +92,7 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
 
 - Make sure user data folder is set to the default location \Documents\Image Line. If you have it set elsewhere and want to keep it that way, clone the folder to the corresponding place ...\Settings\Hardware
 
-- If you are still having an issue, on FL Studio go to View - Script Output, hit a few buttons on the Alesis and copy what it there. Then create an issue on github or respond on the Image Line forum entry (link above) for this controller. Describe the issue and paste the results from the Script Output.
+- If you are still having an issue, on FL Studio go to View - Script Output, hit a few buttons on the Alesis and copy what is there. Then create an issue on github or respond on the Image Line forum entry (link above) for this controller. Describe the issue and paste the results from the Script Output.
 
 
 ## Notes:
