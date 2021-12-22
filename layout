@@ -1,0 +1,20 @@
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |   <---- first row
+ -------       -------       -------       -------       -------       -------      -------       -------       -------	      -------	
+ 
+  undo        metronome        esc            up         browser       rotate      step rec        save	        quantize      rand pat
+                                                                       window 
+  
+ 
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |                               <---- second row
+ -------       -------       -------       -------       -------       -------      -------       -------
+                                                                         +                        rotate 
+  solo          enter          left           down        right         knob       open chan      mix/step
+                                                                        range                     options
+               
+ 
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |                 <---- third row
+ -------       -------       -------       -------       -------       -------      -------       -------       -------	
+  
+  song          over         playlist       piano        channel        mixer        plugin       toggles      mixer/chan
+ pattern        dub                                                                  browser      pad modes      link
+ toggle
