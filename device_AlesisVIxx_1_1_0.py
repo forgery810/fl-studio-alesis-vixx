@@ -1,6 +1,6 @@
-# name=Alesis VIxx-1.10
+# name=Alesis VIxx-1.11
 # Author: ts-forgery
-# Version 1.10
+# Version 1.11
 
 #This program was designed using an Alesis VI61. It should work on the VI25 and VI49 as all buttons used have 
 #the same MIDI CC number attached based on their position starting from the left of each row. The standard mapping 
@@ -13,6 +13,7 @@
 #				added quick quantize button
 #				added button to link mixer/channel
 #				record, loop, overdub, metronome buttons now stay lit when active
+# 1.11 update - fixed random generator bugs
 
 
 import arrangement
@@ -29,12 +30,12 @@ from midi import *
 import _random
 
 if device.isAssigned():					# check if device assigned. not currently used
-	print("Device assigned - ver 1.10")
+	print("Device assigned - ver 1.11")
 	print(device.getName())
 	print(device.getPortNumber())
 
 else:
-	print("Not assigned - ver 1.10")
+	print("Not assigned - ver 1.11")
 
 mixer_num = 0 				# for toggling mixer modes
 proceed = False        			# stores bool value to decide if knob can change values
@@ -59,6 +60,7 @@ def  OnMidiMsg(event):
 
 	current_pattern = patterns.patternNumber()
 	current_channel = channels.channelNumber()
+	pattern_length = patterns.getPatternLength(patterns.patternNumber())
 
 	mixer_focused = ui.getFocused(midi.widMixer)
 	channels_focused = ui.getFocused(midi.widChannelRack)
@@ -338,17 +340,21 @@ def  OnMidiMsg(event):
 				mixer.linkTrackToChannel(0)
 
 			elif event.data1 == button["rand_gen"]:
-				print(patterns.getPatternLength(channels.channelNumber()))
-				for i in range(patterns.getPatternLength(channels.channelNumber())):
+				print("Random")
+				print(pattern_length)
+				print("Channel")
+				print(channels.channelNumber())
+				for i in range(pattern_length):
 					channels.setGridBit(channels.channelNumber(), i, 0)
-				for z in range((patterns.getPatternLength(channels.channelNumber()))):
+				for z in range(pattern_length):
 					y = num_gen()
-					print(y)
+					# print(y)
 					if (y % 2) == 0:
-						print('even')
+						# print('even')
 						channels.setGridBit(channels.channelNumber(), z, 1)
 					else:
 						print('odd')
+				event.handled = True
 
 				
 
@@ -404,7 +410,11 @@ class Knob:
 					mixer.setTrackVolume(self.data_one-19, self.data_two/127)
 			elif self.focused == 1 and mixer_num == 1:
 				mixer.setTrackPan(self.data_one-19, mapvalues(self.data_two, -1, 1, 0, 127))
-			elif self.focused == 0:
+			elif self.focused == 0 and self.data_one-20 < channels.channelCount():
+				print("Channel Count")
+				print(channels.channelCount())
+				print("Active Channel")
+				print(self.data_one-20)
 				channels.setChannelVolume(self.data_one-20, mapvalues(self.data_two, 0, 1, 0, 127))
 
 		elif proceed == True and temp_chan != self.data_one - 19:
