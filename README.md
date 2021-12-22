@@ -7,9 +7,11 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 Image Line forum entry for this script: https://forum.image-line.com/viewtopic.php?f=1994&t=247069
 
 Update to 1.1.0 -> Added functionality including random trig pattern generator, quick quantize, and channel/mixer link.
+                   These functions are only available on the VI49 and 61, although the layout or device python file could be edited to include them on the VI25 at the expense of                    other functions.
                    Also, the record, loop, overdub and metronome button LEDs now stay on when in use. 
                    
-Bug: Random pattern generator does not function on first channel.
+                   
+Bug: Random pattern generator does not function on first channel. This function behaves a bit oddly but I am working on cleaninig it up.
 
 ## Installation
 
