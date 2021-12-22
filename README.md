@@ -11,7 +11,6 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
                    Also, the record, loop, overdub and metronome button LEDs now stay on when in use. 
                    
                    
-Bug: Random pattern generator does not function on first channel. This function behaves a bit oddly but I am working on cleaninig it up.
 
 ## Installation
 
