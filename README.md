@@ -6,6 +6,9 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 Image Line forum entry for this script: https://forum.image-line.com/viewtopic.php?f=1994&t=247069
 
+Update to 1.1.0 -> Added functionality including random trig pattern generator, quick quantize, and channel/mixer link.
+                   Also, the record, loop, overdub and metronome button LEDs now stay on when in use. 
+
 ## Installation
 
 - Update to the latest version of FL Studio before installing. Some conflicts may occur in 20.7.x versions in particular. See troubleshooting below if you have issues. 
@@ -18,7 +21,6 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
 
 - Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access to everything the VI61 has. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-16. The same with mixer muting, mixer volume, panning and channel volume. 
 
-- The .vi2/.vi4/.vi6 files labeled for version 0.5 will work with 1.0.
 
 
 ## Manual
@@ -50,6 +52,11 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
 - Pressing the pad mode button will rotate through the pad options. Standard plays the selected channels notes as expected. Step mode controls the selected channel as a 
   16 step sequencer. In pad per channel mode each pad individually controls up to the first 16 channels.
   
+- To link channel to a mixer track, highlight the channel you want to link, then push the mixer button and highlight the mixer channel you wish to link it to. Then push the link   button.
+
+- The random pattern button will give each step a 50% chance of being on. Most often this will result in busier patterns. The ability to control how many steps are on/off may be   added in a future update.
+ 
+  
   ##       - Step Sequencer Mode
   
   - In step sequencer mode the channels can be selected and the pads will add or remove steps accordingly. The step mode options button above the pad option button now rotates 
@@ -57,7 +64,7 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
     
   - The knob/range button will increase the steps the pads and knobs control by 16 with each push. Up to 64 steps can be contorlled this way.
 
-  - Currently, this only functions when al channels are shown. If some are hidden in groups, it will not work.
+  - Currently, this only functions when all channels are shown. If some are hidden in groups, it will not work.
     
 ## Broswer Mode
 
@@ -89,8 +96,7 @@ Image Line forum entry for this script: https://forum.image-line.com/viewtopic.p
 
 - (+) -> This has only been tested on a VI61 in Windows but the switches should correlate with the other models. Please let me know if you have any issues.
 
-- The .vi6, .vi4 and .vi2 files were created using the Alesis layout editor and are optimized for the script. The 49(.vi4) and 25(.vi2) files are untested but should work. These layouts change the buttons to momentary rather than toggle, lest each has to be pushed twice.
-
+- The .vi6, .vi4 and .vi2 files were created using the Alesis layout editor and are optimized for the script. The 49(.vi4) and 25(.vi2) files are untested but should work.
 
 
 
