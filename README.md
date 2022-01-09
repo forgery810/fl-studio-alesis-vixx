@@ -6,11 +6,22 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 Image Line forum entry for this script: https://forum.image-line.com/viewtopic.php?f=1994&t=247069
 
-Update to 1.1.0 -> Added functionality including random trig pattern generator, quick quantize, and channel/mixer link.
-                   These functions are only available on the VI49 and 61, although the layout or device python file could be edited to include them on the VI25 at the expense of                    other functions.
-                   Also, the record, loop, overdub and metronome button LEDs now stay on when in use. 
+Update to 1.1.0 -> - Added functionality including random trig pattern generator, quick quantize, and channel/mixer link.
+                     These functions are only available on the VI49 and 61, although the layout or device python file could be edited to include them on the VI25 at the expense                      of other functions.
+                   - The record, loop, overdub and metronome button LEDs now stay on when in use. 
                    
-                   
+Update to 1.5   -> - generator now uses pitch wheel to determine likelihood of trigs being generated. Moving the pitch up lowers the number while down fills every step.
+                   - Random note generator with scales and range control has been added.
+                   - There is a new step parameter edit mode that allows VI49 and 25 users to edit steps without having to use a second Alesis layout
+                   - Pads now mapped to FPC when loaded
+                   - Channels can now be linked to mixer track
+                   - The color of tracks and channels can now be changed
+                   - On VI61, buttons 12-16 jump to patterns 1-5 and buttons go to 6-10 respectively
+                   - A number of plugins have knobs auto-mapped
+                   - Script has been re-organized 
+                   - See version document for more info
+
+                             
 
 ## Installation
 
@@ -18,11 +29,13 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
 
 - Clone the folder and unzip it to Documents/Image-Line/FL Studio/Settings/Hardware/  (put the folder here, not just the files)
 
-- The data.py must be in same folder with the device_AlesisVIxx_1_0_2.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
+- All .py must be in same folder with the device_AlesisVIxx_1_0_2.py file. The folder named can be anything. The name in the first line of code of the .py file determines what appears in FL Studio.
 
 - In FL studio under Options/MIDI settings, with the keyboard connected, select the VI61 (or 25/49)(+) under Input. Select "Controller Type" and in the right hand corner you should see the Alesis VIxx option. IMPORTANT: MIDIIN2 must be disabled. Only enable VI61 under the Input settings.
 
 - Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access to everything the VI61 has. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-16. The same with mixer muting, mixer volume, panning and channel volume. 
+
+  With version 1.5 and the new parameter edit mode, step editing no longer needs two layouts to access all steps. Some of the news functions, including random, will need an edit of the layout or a second one to be able to accessed. 
 
 
 
@@ -30,35 +43,37 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
 
 -  Note the layout file for button functions. Most of this is self explanatory. A number of the functions are dependent on which window is focused.  
 
--  Selecting patterns has moved to the transport section and is controlled by the double arrows either direction. The new pattern button has been eliminated from previous versions.
+-  Selecting patterns has moved to the transport section and is controlled by the double arrows either direction. The new pattern button has been eliminated from previous          versions.
 
-- The mod wheel figures prominently in this setup. It is used to select channels when channel mode is active and tracks when the mixer is active.
-  The directional buttons serve the same purpose but the wheel is much easier to use. 
+- The mod wheel figures prominently in this setup. It is used to select channels when channel mode is active and tracks when the mixer is active. The directional buttons serve     the same purpose but the wheel is much easier to use. 
   
 - The enter button is mode dependent. In channel and mixer mode it will toggle the muting of the selected track/channel. In browser mode it will allow the selection and
   assignment of samples and plugins. 
   
-- The + knob range button changes the tracks and channels that the knobs can access and the steps the pads can. The button will rotate through ranges 1-16, 17-32, 33-48, and 48-     64. This number of ranges can be reduced will some simple code changes if desired for simplicity.
+- The + knob range button changes the tracks and channels that the knobs can access and the steps the pads can. The button will rotate through ranges 1-16 and 17-32. The range  
+  options have been reduced to make the script easier to use. This can be altered in the code.
 
-- The mouse should be moved to a neutral section of the FL layout. If it is over a knob or step, for example, the text on the top left will not display info necessary to know       which mode you are in.
+- The mouse should be moved to a neutral section of the FL layout. If it is over a knob or step, for example, the text on the top left will not display info necessary to know     which mode you are in. 
 
 
 ##       Mixer Mode
  
--  When the mixer is focused again the mod wheel will scroll through the tracks. Enter toggles mute for the selected channel and solo works as expected. The knobs will control the track level for corresponding track.
-   If the master track is highlighted any knob will control the master volume but will revert back to the standard setup once another track is selected. The knob must first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will change the mode. Panning mode will change the knob control to panning with the same behaviour as the level control. Knob/Range can increase the track number the knobs control. 
+- When the mixer is focused again the mod wheel will scroll through the tracks. Enter toggles mute for the selected channel and solo works as expected. The knobs will control     the track level for corresponding track.
+
+  If the master track is highlighted the first knob will control the master volume but will revert back to the standard setup once another track is selected. The knob must         first equal the tracks current position before it engages to prevent jumping of values. Pressing the step/mixer options button will change the mode. Panning mode will change     the knob control to panning with the same behaviour as the level control. Knob/Range can increase the track number the knobs control. 
+ 
+- To link channel to a mixer track, highlight the channel you want to link, then push the mixer button and highlight the mixer channel you wish to link it to. Then push the       link button.
+ 
+- Color button can be selected to rotate through a set sequence of colors.
 
 ##      Channel Mode
 
-- When the channel window is focused, the mod wheel controls channel selection. As with the mixer, mute and solo work as well as the knob control over channel volume. 
+-  When the channel window is focused, the mod wheel controls channel selection. As with the mixer, mute and solo work as well as the knob control over channel volume. 
 
-- Pressing the pad mode button will rotate through the pad options. Standard plays the selected channels notes as expected. Step mode controls the selected channel as a 
-  16 step sequencer. In pad per channel mode each pad individually controls up to the first 16 channels.
-  
-- To link channel to a mixer track, highlight the channel you want to link, then push the mixer button and highlight the mixer channel you wish to link it to. Then push the link   button.
-
-- The random pattern button will give each step a 50% chance of being on. Most often this will result in busier patterns. The ability to control how many steps are on/off may be   added in a future update.
- 
+-  Pressing the pad mode button will rotate through the pad options. Standard plays the selected channels notes as expected. Step mode controls the selected channel as a 
+   16 step sequencer. In pad per channel mode each pad individually controls up to the first 16 channels.
+   
+ - The color button functions the same here as in mixer mode.
   
   ##       - Step Sequencer Mode
   
@@ -68,6 +83,17 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
   - The knob/range button will increase the steps the pads and knobs control by 16 with each push. Up to 64 steps can be contorlled this way.
 
   - Currently, this only functions when all channels are shown. If some are hidden in groups, it will not work.
+  
+  ##       - Parameter Edit Mode
+  
+  - The fourth option under pad mode allows editing of steps, one at a time. When in the mode, press the pad of the step you want to edit. Now the first 7 knobs control the 
+    parameters for that step (pitch, velocity, release, etc). This eliminates the need for a second Alesis layout to access all steps for VI49 and 25 users.
+    
+  ##      - Random
+  
+  - The random pattern button on VI49 and VI61 will generate a random step sequence. Use the pitch wheel to determine the likelihood of each step being triggered. Down increases     the number of steps set. Pushing the wheel all the way up is a way to clear the pattern.
+
+  - The random note generator will change the pitch of every step a random note in the selected key. With shift mode set, the first four knobs can be used to edit the scale.         The first knob controls the note and the second control decides the scale. The third and fourth knob control the low and high end of the note range. 
     
 ## Broswer Mode
 
@@ -75,9 +101,9 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
   
 ## Plugins
 
-- When a plugin is in focus, the knobs will control some of its functionality. The knob range can be increased to access more parameters. Unfortunately, the default order is set by FL or the plugin maker, so for plugins with a high number of parameters, it is not realistic to use. For lower parameter plugins (Fruity Granulizer and Tranistor Bass e.g.) it is very functional, though. 
+- When a plugin is in focus, the knobs will control some of its functionality. The knob range can be increased to access more parameters. Unfortunately, the default order is set   by FL or the plugin maker, so for plugins with a high number of parameters, it is not realistic to use. For lower parameter plugins (Fruity Granulizer and Tranistor Bass e.g.)   it is very functional, though. 
 
-- The double arrow buttons that usually control the pattern number will rotate through plugin presets when a plugin is focused. This will not work with "internal" presets, as found in older FL Studio plugins. It will work with presets saved under the plugin option arrow in the window. For example, Flex and Ogun work outright but in Poizone the presets within the plugin itself will not rotate so you will have to save the ones you want using the window option.  
+- The double arrow buttons that usually control the pattern number will rotate through plugin presets when a plugin is focused. This will not work with "internal" presets, as     found in older FL Studio plugins. It will work with presets saved under the plugin option arrow in the window. For example, Flex and Ogun work outright but in Poizone the       presets within the plugin itself will not rotate so you will have to save the ones you want using the window option.  
 
  ## VI25 and VI49 Users
  
@@ -86,14 +112,15 @@ Update to 1.1.0 -> Added functionality including random trig pattern generator, 
   
 ## Troubleshooting
 
-- Update FL Studio before you do anything else. If you are on a cracked copy of FL Studio, please do not ask for help with any problems.
+- Update FL Studio before you do anything else. If you are on a cracked/illegal copy of FL Studio, please do not ask for help with any problems and go buy FL Studio.
 
 - Most problems have arisen from the folder not being in the right location and the data.py not being present.
 
-- Make sure user data folder is set to the default location \Documents\Image Line. If you have it set elsewhere and want to keep it that way, clone the folder to the corresponding place ...\Settings\Hardware
+- Make sure user data folder is set to the default location \Documents\Image Line. If you have it set elsewhere and want to keep it that way, clone the folder to the             
+  corresponding place ...\Settings\Hardware
 
-- If you are still having an issue, on FL Studio go to View - Script Output, hit a few buttons on the Alesis and copy what is there. Then create an issue on github or respond on the Image Line forum entry (link above) for this controller. Describe the issue and paste the results from the Script Output.
-
+- If you are still having an issue, on FL Studio go to View - Script Output, hit a few buttons on the Alesis and copy what is there. Then create an issue on github or respond on 
+  the Image Line forum entry (link above) for this controller. Describe the issue and paste the results from the Script Output.
 
 ## Notes:
 
