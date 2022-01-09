@@ -1,0 +1,15 @@
+version info
+
+
+
+1.5 ---
+	-FPC - Pads are now mapped to FL config
+	-New step parameter edit mode added (easier for VI25 and VI49 users in particular)
+	-Random steps update - now use pitch wheel to increase/decrease probability of notes occurring
+	-Random notes added with ability to choose key/scale 
+	-Channel colors - A dedicated button for changing the color of mixer/channels has been added
+	-Knob/step range has been reduced to 16/32 for ease of use
+	-On VI61 buttons 12-16 jump to patterns 1-5 and buttons go to 6-10 respectively
+	-Link channel to mixer track button added
+	-A number of plugins have had controls mapped to knobs 
+	-When master track is highlighted, now only the first knob controls it rather than every knob
