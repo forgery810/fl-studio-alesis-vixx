@@ -36,7 +36,10 @@ Update to 1.5   -> - generator now uses pitch wheel to determine likelihood of t
 - Starting with version 0.3 and later VI25 and 49 need two .vi2/.vi4 files to use all of the functionality. The idea is to flip between the two presets to gain access to everything the VI61 has. In step mode the first preset's knobs will affect steps 1-8 and the second preset 9-16. The same with mixer muting, mixer volume, panning and channel volume. 
 
   With version 1.5 and the new parameter edit mode, step editing no longer needs two layouts to access all steps. Some of the news functions, including random, will need an edit of the layout or a second one to be able to accessed. 
-
+ 
+ - 1.5 comes with a new layout that needs to be used with the VI61 and 49 for the Shift button to function correctly. Upload it or use the Alesis program to change the Shift     
+   button to a toggle rather than momentary.
+ 
 
 
 ## Manual
