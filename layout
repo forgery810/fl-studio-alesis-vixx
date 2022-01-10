@@ -5,16 +5,16 @@
                                                                        window 
   
  
-|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |                               <---- second row
- -------       -------       -------       -------       -------       -------      -------       -------
-                                                                         +                        rotate 
-  solo          enter          left           down        right         knob       open chan      mix/step
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |               <---- second row
+ -------       -------       -------       -------       -------       -------      -------       -------       -------       -------
+                                                                         +                        rotate         change        rand
+  solo          enter          left           down        right         knob       open chan      mix/step       color         notes
                                                                         range                     options
                
  
-|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |                 <---- third row
- -------       -------       -------       -------       -------       -------      -------       -------       -------	
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  11   |            <---- third row
+ -------       -------       -------       -------       -------       -------      -------       -------       -------	      -------
   
-  song          over         playlist       piano        channel        mixer        plugin       toggles      mixer/chan
+  song          over         playlist       piano        channel        mixer        plugin       toggles      mixer/chan      shift
  pattern        dub                                                                  browser      pad modes      link
  toggle
