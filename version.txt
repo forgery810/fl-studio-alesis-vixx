@@ -1,6 +1,24 @@
 version info
 
 
+ 1.01 update - eliminated plugin_name bug
+ 1.02 update - fixed f-string conflicts with FL Studio
+ 1.10 update - added random pattern generator
+			  - added quick quantize button
+			  - added button to link mixer/channel
+			  - record, loop, overdub, metronome buttons now stay lit when active
+			  - open channel button now toggles plugins open/close when pressed 
+ 1.11 update - fixed random generator bugs
+ 1.20 update - mixer window now scrolls with selection
+			  - can now change the color of channel and mixer tracks
+			  - pitch bend value determines number of steps set with random generator
+ 			  - mod wheel and step mode now respect groups
+			  - fixed solo button which apparently wasn't working
+		  - added plugin specific controls for knobs (transistor bass, DX10, drumpad)
+					they are now more logically arranged
+             - reduced default offset for knobs/steps to switch switch between 32 and 16 for easier use
+					this can be changed
+
 
 1.5 ---
 	-FPC - Pads are now mapped to FL config
