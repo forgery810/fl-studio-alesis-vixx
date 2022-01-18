@@ -22,6 +22,7 @@ Update to 1.5   -> - generator now uses pitch wheel to determine likelihood of t
                    - See version document for more info
 
                              
+Update to 1.52 -> - Fixed some bugs and expanded FPC pad access
 
 ## Installation
 
