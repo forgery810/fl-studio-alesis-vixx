@@ -31,3 +31,8 @@ version info
 	-Link channel to mixer track button added
 	-A number of plugins have had controls mapped to knobs 
 	-When master track is highlighted, now only the first knob controls it rather than every knob
+	
+1.52 ---
+	- fixed bug which caused double notes to appear
+	- fixed bug which caused notes to not end until end of pattern
+	- Second page of FPC pads can now be accessed by pushing the range button to alternate between A and B 
