@@ -1,6 +1,6 @@
-# name=Alesis VIxx-1.50 dl from git
+# name=Alesis VIxx-1.52
 # Author: ts-forgery
-# Version 1.5
+# Version 1.52
 
 
 
@@ -18,7 +18,7 @@ def OnInit():
 
 
 	if device.isAssigned():					# check if device assigned
-		print("Device assigned - ver 1.50")
+		print("Device assigned - ver 1.52")
 		print(device.getName())
 		print("Port Number:")
 		print(device.getPortNumber())
