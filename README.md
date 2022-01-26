@@ -105,7 +105,7 @@ Update to 1.52 -> - Fixed some bugs and expanded FPC pad access
   
 ## Plugins
 
-- When a plugin is in focus, the knobs will control some of its functionality. The knob range can be increased to access more parameters. Unfortunately, the default order is set   by FL or the plugin maker, so for plugins with a high number of parameters, it is not realistic to use. For lower parameter plugins (Fruity Granulizer and Tranistor Bass e.g.)   it is very functional, though. 
+- When a plugin is in focus, the knobs will control some of its functionality. The knob range can be increased to access more parameters. Some of the plugins have layouts preset   in the script for better functionality. 
 
 - The double arrow buttons that usually control the pattern number will rotate through plugin presets when a plugin is focused. This will not work with "internal" presets, as     found in older FL Studio plugins. It will work with presets saved under the plugin option arrow in the window. For example, Flex and Ogun work outright but in Poizone the       presets within the plugin itself will not rotate so you will have to save the ones you want using the window option.  
 
