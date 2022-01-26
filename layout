@@ -1,8 +1,14 @@
-|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |   <---- first row
- -------       -------       -------       -------       -------       -------      -------       -------       -------	      -------	
+(T) = Must be set to toggle in Alesis layout. Record must also be set to Toggle.
+      All others are set to momentary
+      
+
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |                <---- first row
+ -------       -------       -------       -------       -------       -------      -------       -------       -------	      -------	 
  
   undo        metronome        esc            up         browser       rotate      step rec        save	        quantize      rand pat
                                                                        window 
+                 (T)
+  48             49            50             51           52            53           54            55            56            57          CC #
   
  
 |   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |               <---- second row
@@ -10,11 +16,16 @@
                                                                          +                        rotate         change        rand
   solo          enter          left           down        right         knob       open chan      mix/step       color         notes
                                                                         range                     options
-               
+  
+   99            65            66             67           68            69           70            71             72           73          CC #
+  
  
-|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |            <---- third row
+|   1   |     |   2   |     |   3   |     |   4   |     |   5   |     |   6   |    |   7   |     |   8   |     |   9   |     |  10   |                <---- third row
  -------       -------       -------       -------       -------       -------      -------       -------       -------	      -------
   
   song          over         playlist       piano        channel        mixer        plugin       toggles      mixer/chan      shift
  pattern        dub                                                                  browser      pad modes      link
  toggle
+                (T)                                                                                                             (T)
+                                                                                                                                 
+  80            81             82            83           84             85           86            87            88             89         CC #         
