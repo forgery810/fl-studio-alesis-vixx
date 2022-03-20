@@ -21,7 +21,7 @@ Update to 1.5   -> - generator now uses pitch wheel to determine likelihood of t
                              
 Update to 1.52 -> - Fixed some bugs and expanded FPC pad access
 
-Update to 1.54 -> - Fixed issue where solo button was not functions correctly in mixer mode
+Update to 1.54 -> - Fixed issue where solo button was not functioning correctly in mixer mode
                   - Cleaned up code
 
 ## Installation
