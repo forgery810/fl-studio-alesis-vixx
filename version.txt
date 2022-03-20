@@ -20,7 +20,7 @@ version info
 					this can be changed
 
 
-1.5 ---
+1.50 ---
 	-FPC - Pads are now mapped to FL config
 	-New step parameter edit mode added (easier for VI25 and VI49 users in particular)
 	-Random steps update - now use pitch wheel to increase/decrease probability of notes occurring
@@ -36,3 +36,7 @@ version info
 	- fixed bug which caused double notes to appear
 	- fixed bug which caused notes to not end until end of pattern
 	- Second page of FPC pads can now be accessed by pushing the range button to alternate between A and B 
+
+1.54 ---
+	- Fixed issue where solo button was not functions correctly in mixer mode
+	- Cleaned up code

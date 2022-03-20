@@ -6,9 +6,6 @@ Youtube Demo: https://www.youtube.com/watch?v=xVxR8Js0qyI
 
 Image Line forum entry for this script: https://forum.image-line.com/viewtopic.php?f=1994&t=247069
 
-Update to 1.1.0 -> - Added functionality including random trig pattern generator, quick quantize, and channel/mixer link.
-                     These functions are only available on the VI49 and 61, although the layout or device python file could be edited to include them on the VI25 at the expense                      of other functions.
-                   - The record, loop, overdub and metronome button LEDs now stay on when in use. 
                    
 Update to 1.5   -> - generator now uses pitch wheel to determine likelihood of trigs being generated. Moving the pitch up lowers the number while down fills every step.
                    - Random note generator with scales and range control has been added.
@@ -23,6 +20,9 @@ Update to 1.5   -> - generator now uses pitch wheel to determine likelihood of t
 
                              
 Update to 1.52 -> - Fixed some bugs and expanded FPC pad access
+
+Update to 1.54 -> - Fixed issue where solo button was not functions correctly in mixer mode
+                  - Cleaned up code
 
 ## Installation
 
@@ -132,7 +132,7 @@ Update to 1.52 -> - Fixed some bugs and expanded FPC pad access
 
 - The .vi6, .vi4 and .vi2 files were created using the Alesis layout editor and are optimized for the script. The 49(.vi4) and 25(.vi2) files are untested but should work.
 
+## Bugs
 
-
-
+- When the master track is selected in Mixer, other tracks do not respond appropriately to knob turns
 

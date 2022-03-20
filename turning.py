@@ -19,14 +19,11 @@ import data
 
 offset = [0, 16, 32, 48]
 temp_step = 0
-# proceed = False
 
 class Knob:
-	global proceed
 
 	def __init__(self, event):
 		global proceed
-
 		self.event = event
 		global temp_chan
 		proceed = False
@@ -68,19 +65,15 @@ class Knob:
 				print(Switch.upper_limit)
 				event.handled = True
 
-
 		elif ui.getFocused(5) and plugins.isValid(self.channel):
 			print('plugin control')
 			self.plugin_control()
 
-
 		elif ui.getFocused(0) and proceed == False:						# This stores the current value at the destination of the knob
 			# print('proceed false mixer focused')
 			if Switch.mixer_num == 0:
-				# print('stored mixer')
 				if mixer.trackNumber() == 0:								# Check if master is selected
 					self.get_track_value = mixer.getTrackVolume(0)
-					# print('master vol')
 				else:		
 					self.get_track_value = mixer.getTrackVolume(self.data_one - 19) 
 
@@ -112,10 +105,8 @@ class Knob:
 				# print('enter knob turn function')
 				self.knob_turn()
 
-
 	def knob_turn(self):
 		global proceed
-		# print('in knob turn function')
 
 		if proceed == True and temp_chan == self.data_one:
 			print("proceeding")
@@ -123,7 +114,6 @@ class Knob:
 				if mixer.trackNumber() == 0 and self.data_one == 20:
 					mixer.setTrackVolume(0, self.data_two/127)
 				else:
-					# print('setting Track Volume')
 					mixer.setTrackVolume(self.data_one-19, self.data_two/127)
 			elif ui.getFocused(0) and Switch.mixer_num == 1:
 				mixer.setTrackPan(self.data_one-19, mapvalues(self.data_two, -1, 1, 0, 127))
@@ -131,12 +121,9 @@ class Knob:
 			elif ui.getFocused(1) and self.data_one-20 < channels.channelCount()  and Switch.shift_status == False:
 				# print(f'volume: {mapvalues(self.data_two, -1, 1, 0, 127)}')
 				channels.setChannelVolume(self.data_one-20, mapvalues(self.data_two, 0, 1, 0, 127))
-			# else:
-			# 	print('leaving')	
 		elif proceed == True and temp_chan != self.data_one:
 			print("proceed no more")
 			proceed = False		
-
 
 	def step_param(self):
 
@@ -145,7 +132,6 @@ class Knob:
 		self.pad_step = notes.temp_step[0]
 		self.step = 0
 		self.nothing = 0
-
 
 		if Switch.mode_toggle == 3 and self.event_one < 27 and ui.getFocused(1): 		# check if param entry mode is on and make sure knob is not out of parameter range
 			print('in param knob mode')
@@ -159,7 +145,6 @@ class Knob:
 			else:
 				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step - 60, self.event_one - 20, self.data_two, 1)
 
-
 		if channels.getGridBit(channels.channelNumber(), self.data_one - 20) == 1 and Switch.mode_toggle == 1 and Switch.shift_status == False:
 			# print(f'Switch Mode toggle: {Switch.mode_toggle}')
 			print("getGridBit gotten")
@@ -172,10 +157,6 @@ class Knob:
 			else:	
 				channels.setStepParameterByIndex(channels.channelNumber(), patterns.patternNumber(), self.data_one - 20, self.parameter, self.data_two, 1)
 			
-		# else:
-		# 	print("getGridbit not gotten")
-
-
 	def plugin_control(self):
 		
 		self.plugin = plugins.getPluginName(self.channel)	
@@ -187,18 +168,14 @@ class Knob:
 				# print(plugin_dict[self.plugin][knob_num.index(self.data_one)])                                                                             																		
 				plugins.setParamValue(mapvalues(self.data_two, 0, 1, 0, 127), plugin_dict[self.plugin][knob_num.index(self.data_one)], self.channel)
 				return
-
 			else:		
 				print('else')
 				plugins.setParamValue(mapvalues(self.data_two, 0, 1, 0, 127), self.data_one - 20, self.channel)
 				return
-
-
 
 def mapvalues(value, tomin, tomax, frommin, frommax):
 	input_value = value
 	solution = tomin + (tomax-(tomin))*((input_value - frommin) / (frommax - (frommin)))
 	if  -0.01 < solution < 0.01:
 		solution = 0
-#	print(f"Solution: {solution}")
 	return solution
