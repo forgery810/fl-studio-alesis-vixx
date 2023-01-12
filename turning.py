@@ -9,173 +9,223 @@ import plugins
 import mixer
 import device
 import patterns
-from data import button, mode, parameters, knob, colors
+from data import button,  knob
 from midi import *
 import switch
 from switch import Switch
+from notes import Scales, Notes
 import notes
 from plugindata import knob_num, transistor_bass, drumpad, dx10, plugin_dict
 import data 
-
-offset = [0, 16, 32, 48]
-temp_step = 0
+from action import Action
+from pads import Pads 
+from utility import Utility
+from config import Config
+from timing import Timing
 
 class Knob:
+	proceed = False
+	temp_chan = 0
+	get_track_value = 0	
+
 
 	def __init__(self, event):
-		global proceed
 		self.event = event
-		global temp_chan
-		proceed = False
-		self.mode_toggle = Switch.mode_toggle
-		# self.mixer_num = mixer.trackNumber()
+		self.pad_offset = 60
+		self.knob_offset = 51
+		self.round_margin = 0.10
+		self.chan_in_grp = channels.selectedChannel()
 		self.channel = channels.channelNumber()
-		self.round_offset = 0.16
-		self.get_track_value = 0
-		self.data_one = event.data1 + offset[switch.Switch.offset_iter]
+		self.data_one = event.data1 
 		self.data_two = event.data2
 		self.two_rounded = round(self.data_two/127, 2)
-		self.plugin = 0
-		self.event_one = event.data1
-		print('knob class')
+		self.selected_channel = self.data_one - 51 + Pads.get_offset()
+		self.selected_track = self.data_one - 50 + Pads.get_offset()		
 
-		if ui.getFocused(1) and Switch.shift_status == True:
-			print('enter step param edit in turning')
-			if event.data1 == knob['knob_one']:
-				Switch.root_note = int(mapvalues(self.data_two, 0, 11, 0, 127))
-				ui.setHintMsg(data.notes_list [int(mapvalues(self.data_two, 0, 11, 0, 127)) ] )
-				print(Switch.root_note)
-				event.handled = True
+		self.triage()
 
-			if event.data1 == knob['knob_two']:
-				Switch.scale_choice = int(mapvalues(self.data_two, 0, len(data.scale_names)-1, 0, 127))
-				ui.setHintMsg(data.scale_names[int(mapvalues(self.data_two, 0, len(data.scale_names)-1, 0, 127))])
-				print(Switch.scale_choice)
-				event.handled = True
+	def triage(self):
+		"""Function takes context of knob turn, if in step parameter editing mode or a plugin is focused, and sends data to correct function.
+			Else if the mixer or channel rack is focused, function stores current value of channel/track/panner to allow for pickup""" 
 
-			if event.data1 == knob['knob_three']:
-				Switch.lower_limit = int(mapvalues(self.data_two, 0, 25, 0, 127))
-				ui.setHintMsg("Setting Lower Limit")
-				print(Switch.lower_limit)
-				event.handled = True
+		if ui.getFocused(1):
+				if Action.get_shift_status(): 											# If channels focused and shift true, enter scale setting mode
+					self.set_scale()			
+				elif Pads.get_pad_mode() == 1 or Pads.get_pad_mode() == 3:
+					self.step_param()
+				elif Action.get_alt_status() == True: 
+					self.selected()
+					self.event.handled = True 
+				elif Action.get_alt_status() == False:			
+					self.get_match()													# If pad_mode standard or pad per channel knob changes channel volume
 
-			if event.data1 == knob['knob_four']:
-				Switch.upper_limit = int(mapvalues(self.data_two, 50, 0, 0, 127))
-				ui.setHintMsg("Setting Upper Limit")
-				print(Switch.upper_limit)
-				event.handled = True
-
-		elif ui.getFocused(5) and plugins.isValid(self.channel):
-			print('plugin control')
+		elif ui.getFocused(5) and plugins.isValid(self.channel):					# If valid plugin focused, alter plugin.
 			self.plugin_control()
 
-		elif ui.getFocused(0) and proceed == False:						# This stores the current value at the destination of the knob
-			# print('proceed false mixer focused')
-			if Switch.mixer_num == 0:
-				if mixer.trackNumber() == 0:								# Check if master is selected
-					self.get_track_value = mixer.getTrackVolume(0)
-				else:		
-					self.get_track_value = mixer.getTrackVolume(self.data_one - 19) 
+		elif Action.get_alt_status() == True: 
+			if Action.get_shift_status() == False:
+				self.selected()
+				self.event.handled = True 
 
-			elif Switch.mixer_num == 1:
-				# print('store panning info')
-				self.get_track_value = mixer.getTrackPan(self.data_one-19)
-				print(self.get_track_value)
-				self.two_rounded = mapvalues(self.data_two, -1.0, 1.0, 0, 127)
-				print(self.two_rounded)
+		elif Knob.proceed == True and Knob.temp_chan == self.data_one:
+			self.knob_turn()
 
-		elif ui.getFocused(1) and Switch.shift_status == False:
-			# print('stored channel')
-			if self.mode_toggle != 1 and self.mode_toggle != 3:
-				if self.data_one-20 < channels.channelCount():
-					self.get_track_value = channels.getChannelVolume(self.data_one-20) 
-			else:
-				# print('go to step parameter function')
-				self.step_param()
+		elif Knob.proceed == True and Knob.temp_chan != self.data_one:		# Current knob does not matched stored knob 
+			Knob.proceed = False		
+
+		else:
+			self.get_match()
+			self.event.handled = True
 
 
-	
-																					# Knob must match current value before it engages.
-		if self.two_rounded <= (self.get_track_value + self.round_offset) and self.two_rounded >= (self.get_track_value - self.round_offset):
-			print("matched") 
-			proceed = True
-			temp_chan = self.data_one
-			# print(f'temp chan:  {temp_chan}')
-			if switch.Switch.mode_toggle != 1 and Switch.mode_toggle != 3 or ui.getFocused(1)==False:
-				# print('enter knob turn function')
+	def get_match(self):
+		if ui.getFocused(1) and self.selected_track < channels.channelCount():		# Get channel vol if Channels focused and valid channel
+			if Pads.get_mixer_param_index() == 0:	
+				Knob.get_track_value = channels.getChannelVolume(self.selected_channel) 
+				self.check_if_matching()
+			elif Pads.get_mixer_param_index() == 1:
+				Knob.get_track_value = channels.getChannelPan(self.selected_channel)
+				self.two_rounded = Utility.mapvalues(self.data_two, -1.0, 1.0, 0, 127)
+				self.check_if_matching()
+
+		elif ui.getFocused(0) and Knob.proceed == False:									# If mixer focused, store the current value at the destination of the knob
+			if Pads.get_mixer_param_index() == 0:									# If level selected, store value
+				Knob.get_track_value = mixer.getTrackVolume(self.selected_track) 
+
+			elif Pads.get_mixer_param_index() == 1:									# If panning selected, store current value.
+				# print('panning selected')
+				Knob.get_track_value = mixer.getTrackPan(self.selected_track)
+				self.two_rounded = Utility.mapvalues(self.data_two, -1.0, 1.0, 0, 127)
+			self.check_if_matching()
+
+																										
+
+	def check_if_matching(self):											
+		# Knob must match current value before it engages.
+
+		if self.two_rounded <= (Knob.get_track_value + self.round_margin) and self.two_rounded >= (Knob.get_track_value - self.round_margin):
+			Knob.proceed = True
+			Knob.temp_chan = self.data_one
+			if Pads.get_pad_mode() != 1 and Pads.get_pad_mode() != 3:
 				self.knob_turn()
 
-	def knob_turn(self):
-		global proceed
+		else:
+			print('not matched')
+			print(Knob.proceed)
+			print(Knob.temp_chan)
 
-		if proceed == True and temp_chan == self.data_one:
-			print("proceeding")
-			if ui.getFocused(0) and Switch.mixer_num == 0:
-				if mixer.trackNumber() == 0 and self.data_one == 20:
-					mixer.setTrackVolume(0, self.data_two/127)
-				else:
-					mixer.setTrackVolume(self.data_one-19, self.data_two/127)
-			elif ui.getFocused(0) and Switch.mixer_num == 1:
-				mixer.setTrackPan(self.data_one-19, mapvalues(self.data_two, -1, 1, 0, 127))
-				# print(f'panning: {mapvalues(self.data_two, -1, 1, 0, 127)}')
-			elif ui.getFocused(1) and self.data_one-20 < channels.channelCount()  and Switch.shift_status == False:
-				# print(f'volume: {mapvalues(self.data_two, -1, 1, 0, 127)}')
-				channels.setChannelVolume(self.data_one-20, mapvalues(self.data_two, 0, 1, 0, 127))
-		elif proceed == True and temp_chan != self.data_one:
-			print("proceed no more")
-			proceed = False		
+	def knob_turn(self):
+		"""Function changes level of selected channel/track once knob matches current value. Function exited when different knob used"""
+
+		if Knob.proceed == True and Knob.temp_chan == self.data_one:
+			if ui.getFocused(0):
+				if Pads.get_mixer_param_index() == 0:
+					mixer.setTrackVolume(self.selected_track, self.data_two/127)
+				elif Pads.get_mixer_param_index() == 1:
+					mixer.setTrackPan(self.selected_track, Utility.mapvalues(self.data_two, -1, 1, 0, 127))
+				
+			elif ui.getFocused(1) and self.selected_channel < channels.channelCount():
+				if Pads.get_mixer_param_index() == 0:
+					channels.setChannelVolume(self.selected_channel, Utility.mapvalues(self.data_two, 0, 1, 0, 127))
+				elif Pads.get_mixer_param_index() == 1:
+					channels.setChannelPan(self.selected_channel, Utility.mapvalues(self.data_two, -1, 1, 0, 127))
+
+		elif Knob.proceed == True and Knob.temp_chan != self.data_one:		# Current knob does not matched stored knob 
+			Knob.proceed = False		
+			print('proceed false')
+
+	def set_scale(self):
+			"""If shift is active, first four knobs are used to set scale for random note generator"""
+
+			if self.event.data1 == knob['knob_one']:
+				Notes.set_root_note(self.data_two)
+				Scales.display_scale()
+
+			elif self.event.data1 == knob['knob_two']:
+				Scales.set_scale(self.data_two)
+				Scales.display_scale()
+
+			elif self.event.data1 == knob['knob_three']:
+				Notes.set_lower_limit(self.data_two)
+				Notes.display_limits()
+
+			elif self.event.data1 == knob['knob_four']:
+				Notes.set_upper_limit(self.data_two)
+				Notes.display_limits()
+
+			self.event.handled = True		
 
 	def step_param(self):
 
+		step_pattern = 1
+		param_entry = 3
+		self.param_knob = self.data_one - self.knob_offset
 		self.pattern = patterns.patternNumber()
-		self.parameter = switch.Switch.parameter
-		self.pad_step = notes.temp_step[0]
+		self.parameter = Pads.get_step_param()
+		self.pad_step = Pads.get_last_press() - self.pad_offset
 		self.step = 0
-		self.nothing = 0
 
-		if Switch.mode_toggle == 3 and self.event_one < 27 and ui.getFocused(1): 		# check if param entry mode is on and make sure knob is not out of parameter range
-			print('in param knob mode')
-			ui.setHintMsg(parameters[self.event_one -20])
-			if 6 <= self.event_one - 20 >= 5:
-				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step - 60, self.event_one - 20, int(mapvalues(self.data_two, 0 , 255, 0, 127)), 1)
+		if Pads.get_pad_mode() == param_entry and self.data_one < 58 and ui.getFocused(1): 		# check if param entry mode is on and make sure knob is not out of parameter range
+			channels.showGraphEditor(True, self.param_knob, self.pad_step - 60, self.channel)
+																						# bool temporary, long param, long step, long index, (long globalIndex* = 1)			
+			if self.param_knob == pModX or self.param_knob == pModY: 					#long index, long patNum, long step, long param, long value, (long globalIndex = 0)
+				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step, self.param_knob, int(Utility.mapvalues(self.data_two, 0 , 255, 0, 127)), 1)
 
-			elif self.event_one - 20 == 3:
-				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step - 60, self.event_one - 20, int(mapvalues(self.data_two, 0 , 240, 0, 127)), 1)
+			elif self.param_knob == pFinePitch:	
+				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step, self.param_knob, int(Utility.mapvalues(self.data_two, 0 , 240, 0, 127)), 1)
 
 			else:
-				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step - 60, self.event_one - 20, self.data_two, 1)
+				channels.setStepParameterByIndex(self.channel, self.pattern, self.pad_step, self.param_knob, self.data_two, 1)
 
-		if channels.getGridBit(channels.channelNumber(), self.data_one - 20) == 1 and Switch.mode_toggle == 1 and Switch.shift_status == False:
-			# print(f'Switch Mode toggle: {Switch.mode_toggle}')
-			print("getGridBit gotten")
-			if 6 <= self.parameter >= 5:
-				channels.setStepParameterByIndex(self.channel, self.pattern, self.data_one - 20, self.parameter, int(mapvalues(self.data_two, 0 , 255, 0, 127)), 1)
+		if channels.getGridBit(channels.selectedChannel(), self.selected_channel) == 1 and Pads.get_pad_mode() == step_pattern and Action.get_shift_status() == False:
+			channels.showGraphEditor(True, self.parameter, self.selected_channel, self.channel)
 
-			elif self.parameter == 3:
-				channels.setStepParameterByIndex(self.channel, self.pattern, self.data_one - 20, self.parameter, int(mapvalues(self.data_two, 0 , 240, 0, 127)), 1)
-			
+			if self.parameter == pModX or self.parameter == pModY:	
+				channels.setStepParameterByIndex(channels.channelNumber(), self.pattern, self.selected_channel, self.parameter, int(Utility.mapvalues(self.data_two, 0 , 255, 0, 127)), 1)
+			elif self.parameter == pFinePitch:	
+				channels.setStepParameterByIndex(channels.channelNumber(), self.pattern, self.selected_channel, self.parameter, int(Utility.mapvalues(self.data_two, 0 , 240, 0, 127)), 1)			
 			else:	
-				channels.setStepParameterByIndex(channels.channelNumber(), patterns.patternNumber(), self.data_one - 20, self.parameter, self.data_two, 1)
-			
+				channels.setStepParameterByIndex(channels.channelNumber(), self.pattern, self.selected_channel, self.parameter, self.data_two, 1)
+
 	def plugin_control(self):
 		
-		self.plugin = plugins.getPluginName(self.channel)	
+		plugin = plugins.getPluginName(self.channel)	
 		self.param_count = plugins.getParamCount(self.channel)
+		if plugin in plugin_dict:
+			print('has plugin')			                                                                           																		
+			plugins.setParamValue(Utility.mapvalues(self.data_two, 0, 1, 0, 127), plugin_dict[plugin][knob_num.index(self.data_one)], self.channel)
+			self.event.handled = True
+	
+		else:		
+			print('else')
 
-		if self.data_one < self.param_count + 19:				#this is probably unneccessary
-			if self.plugin in plugin_dict:
-				print('has plugin')			
-				# print(plugin_dict[self.plugin][knob_num.index(self.data_one)])                                                                             																		
-				plugins.setParamValue(mapvalues(self.data_two, 0, 1, 0, 127), plugin_dict[self.plugin][knob_num.index(self.data_one)], self.channel)
-				return
-			else:		
-				print('else')
-				plugins.setParamValue(mapvalues(self.data_two, 0, 1, 0, 127), self.data_one - 20, self.channel)
-				return
+			plugins.setParamValue(Utility.mapvalues(self.data_two, 0, 1, 0, 127), self.selected_track, self.channel)
+			self.event.handled = True
+			
 
-def mapvalues(value, tomin, tomax, frommin, frommax):
-	input_value = value
-	solution = tomin + (tomax-(tomin))*((input_value - frommin) / (frommax - (frommin)))
-	if  -0.01 < solution < 0.01:
-		solution = 0
-	return solution
+	def selected(self):
+		"""Function handles knob turns if alt active and channel/track levels altered only if selected"""
+
+		if ui.getFocused(1):
+			if self.data_one == knob["knob_one"]:
+				channels.setChannelVolume(channels.selectedChannel(), Utility.mapvalues(self.data_two, 0, 1, 0, 127))
+				self.event.handled = True
+			elif self.data_one == knob["knob_two"]:
+				channels.setChannelPan(channels.selectedChannel(), Utility.mapvalues(self.data_two, -1, 1, 0, 127))
+				self.event.handled = True
+			elif self.data_one == knob["knob_three"]:
+				print('three')
+				mixer.linkChannelToTrack(channels.selectedChannel(), int(Utility.mapvalues(self.data_two, 0, 125, 0, 127)))
+				self.event.handled = True
+
+		elif ui.getFocused(0):
+			if self.data_one == knob["knob_one"]:
+				mixer.setTrackVolume(mixer.trackNumber(), self.data_two/127, 1)
+				self.event.handled = True
+			elif self.data_one == knob["knob_two"]:
+				mixer.setTrackPan(mixer.trackNumber(), Utility.mapvalues(self.data_two, -1, 1, 0, 127), 1)
+				self.event.handled = True
+			elif self.data_one == knob["knob_three"]:
+				Action.set_mixer_route(int(Utility.mapvalues(self.data_two, 0, 125, 0, 127)))
+				ui.setHintMsg(f"Route Current Track to Track {int(Utility.mapvalues(self.data_two, 0, 125, 0, 127))}")
+				self.event.handled = True

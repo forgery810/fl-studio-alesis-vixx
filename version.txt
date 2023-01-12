@@ -38,5 +38,17 @@ version info
 	- Second page of FPC pads can now be accessed by pushing the range button to alternate between A and B 
 
 1.54 ---
-	- Fixed issue where solo button was not functions correctly in mixer mode
+	- Fixed issue where solo button was not functioning correctly in mixer mode
 	- Cleaned up code
+
+2.00 ---
+	- Added ability to customize layout via website
+        - New 'Alt' button allows knobs to control only selected track/channel
+        - Pads can now be used in Performance Mode
+        - Added Mixer routing
+        - Added ability to set channel/track routing via knob
+        - Pitch Wheel now functions
+        - Added cut, copy, paste functionality
+	- A lot of code cleanup/reorganization
+	- Tap Tempo added
+	- Added config options in config.py file
