@@ -1,6 +1,11 @@
 
 class Config():
 
+	# This should be set to the MIDI Channel of your sustain pedal.
+	# The default is 2 but if this conflicts with your setup, it can be changed. Channel 1 is ok on the VI49 and VI25
+	# but will conflict with knob 14 on the VI61.
+	SUSTAIN_CHANNEL = 2
+
 	# If True, Knobs will only control selected channel/track. 1 - Level. 2 - Panning. 3 - Channel To Track Routing (Channels only) 
 	ALT_ALWAYS = False
 

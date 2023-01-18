@@ -9,6 +9,7 @@ from switch import Switch
 from pads import Pads
 from wheels import ModWheel, PitchWheel
 from action import Action
+from config import Config
 
 class Process:
 
@@ -18,7 +19,10 @@ class Process:
 
 	def triage(self, event):
 		
-		if event.midiId == 176 and event.data1 in knob.values():
+		if event.midiId == 176 and event.data1 == 64 and event.midiChan == Config.SUSTAIN_CHANNEL - 1:		# ignores sustain
+			pass 
+
+		elif event.midiId == 176 and event.data1 in knob.values() and event.midiChan == 0:
 			knobbb = Knob(event)	
 
 		elif event.midiId == 144 or event.midiId == 128:

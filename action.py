@@ -52,7 +52,6 @@ class Action():
 	def mixer_route():
 		mixer.setRouteTo(mixer.trackNumber(), Action.get_mixer_route(), 1)
 
-
 	def get_alt_status():
 		if Config.ALT_ALWAYS == True:
 			return True 
@@ -252,6 +251,12 @@ class Action():
 
 	def item_menu():
 		transport.globalTransport(midi.FPT_ItemMenu, 91)
+
+	def menu():
+		transport.globalTransport(midi.FPT_Menu, 90)
+
+	def undo_up():
+		transport.globalTransport(midi.FPT_UndoUp, 21)
 
 	def countdown():
 		transport.globalTransport(midi.FPT_CountDown, 115)

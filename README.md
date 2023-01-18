@@ -1,5 +1,13 @@
 # fl-studio-alesis-vixx
 
+**** 2.02 Update ****
+
+New Layout for Sustain Pedal
+
+Script Version 2.00 had a conflict between the Sustain Pedal and one of the knobs. To address this the Sustain Pedal must be changed to Channel 2 in the Alesis Layout. New layouts have been added. Another small bug has been fixed and a couple of new functions added. If you don't use Sustain then this update may not be necessary. 
+
+	*********
+
 A MIDI-script for use with the Alesis VI series MIDI controllers in conjunction with FL Studio
 
 This most recent update is significant, with a lot of code changes, additional functionality, and customization options. I did my best to check for errors but, given the amount of changes, it is possible that something was missed. Please let me know any issues are encountered, otherwise I may never know. See the manual for info on how to report issues. Thanks. 

@@ -54,15 +54,15 @@ class Pads():
 
 	def toggle_step_param():
 		print(Pads.get_pad_mode())
-		if ui.getFocused(1):
-			if Pads.get_pad_mode() == 1:
+		if ui.getFocused(1) and Pads.get_pad_mode() == 1:
 				print('Toggle Step Parameter')
 				Pads.parameter_index += 1
 				if Pads.parameter_index == 7:
 					Pads.parameter_index = 0
 				print(Pads.parameter_index)
 				Timing.begin_message(Pads.parameters[Pads.get_step_param()])
-		elif ui.getFocused(0):
+
+		elif ui.getFocused(0) or ui.getFocused(1):
 			Pads.mixer_param_index += 1
 			if Pads.mixer_param_index == 2:
 				Pads.mixer_param_index = 0
@@ -79,11 +79,9 @@ class Pads():
 
 		if playlist.getPerformanceModeState() == 1 and ui.getFocused(widPlaylist):
 			if PitchWheel.get_pitch_value() > 85:
-				print('getPerformanceModeState')
 				playlist.triggerLiveClip(ModWheel.get_pl_mod_value(), -1, TLC_Fill | TLC_MuteOthers)
 				event.handled = True
 			elif PitchWheel.get_pitch_value() < 15:
-				print('lower')
 				playlist.triggerLiveClip(ModWheel.get_pl_mod_value(), event.data1 - 60, TLC_Fill | TLC_MuteOthers | TLC_Queue)
 				event.handled = True
 			else:
@@ -112,7 +110,6 @@ class Pads():
 				event.handled = True	
 
 		elif Pads.get_pad_mode() == 2  and 60 <= event.data1 < (channels.channelCount() + 60):
-			# channels.setChannelPitch(event.data1-60,  Utility.mapvalues(Switch.pitch_num, -1, 1, 0, 127))
 			channels.selectOneChannel(event.data1-60)  
 			channels.midiNoteOn(event.data1-60, 60, event.data2)
 			event.handled = True

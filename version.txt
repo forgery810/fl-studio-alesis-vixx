@@ -52,3 +52,10 @@ version info
 	- A lot of code cleanup/reorganization
 	- Tap Tempo added
 	- Added config options in config.py file
+
+
+2.02 ---
+	- Knob CC numbers were changed to prevent conflicting with sustain pedals
+	- Undo Up function added which undos repeatedly rather than undo/redo
+	- Menu function added which opens main menus rather than item/sub-menus
+	- bug preventing panning in Channel Rack fixed.

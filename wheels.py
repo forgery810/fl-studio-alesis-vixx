@@ -28,10 +28,8 @@ class ModWheel():
 			mixer.setTrackNumber(int(Utility.mapvalues(event.data2, 0, 64, 0, 127)))
 			ui.scrollWindow(midi.widMixer, mixer.trackNumber())
 		elif ui.getFocused(1):
-			print("Channel Number: " + str(channels.selectedChannel()))
 			channels.selectOneChannel(int(round(Utility.mapvalues(event.data2, channels.channelCount()-1, 0, 0, 127), 0)))			
 		elif ui.getFocused(2):
-			print('playlist')
 			playlist.deselectAll()
 			playlist.selectTrack(ModWheel.get_pl_mod_value())
 

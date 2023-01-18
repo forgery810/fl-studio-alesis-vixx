@@ -1,4 +1,6 @@
-knob_num = [ i for i in range(51, 100) ]
+from data import knob
+
+knob_num = [ i for i in knob.values() ]
 
 plugin_names = ('Transistor Bass', 'Drumpad', 'Fruity DX10')
 

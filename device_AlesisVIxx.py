@@ -1,6 +1,6 @@
-# name=Alesis VIxx-2-00
+# name=Alesis VIxx-2-02
 # Author: ts-forgery
-VERSION = '2.00'
+VERSION = '2.02'
 
 import device
 import channels

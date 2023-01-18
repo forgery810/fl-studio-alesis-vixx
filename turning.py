@@ -33,14 +33,15 @@ class Knob:
 		self.event = event
 		self.pad_offset = 60
 		self.knob_offset = 51
+		self.track_offset = 50
 		self.round_margin = 0.10
 		self.chan_in_grp = channels.selectedChannel()
 		self.channel = channels.channelNumber()
 		self.data_one = event.data1 
 		self.data_two = event.data2
 		self.two_rounded = round(self.data_two/127, 2)
-		self.selected_channel = self.data_one - 51 + Pads.get_offset()
-		self.selected_track = self.data_one - 50 + Pads.get_offset()		
+		self.selected_channel = self.data_one - self.knob_offset + Pads.get_offset()
+		self.selected_track = self.data_one - self.track_offset + Pads.get_offset()		
 
 		self.triage()
 
@@ -165,7 +166,7 @@ class Knob:
 		self.pad_step = Pads.get_last_press() - self.pad_offset
 		self.step = 0
 
-		if Pads.get_pad_mode() == param_entry and self.data_one < 58 and ui.getFocused(1): 		# check if param entry mode is on and make sure knob is not out of parameter range
+		if Pads.get_pad_mode() == param_entry and self.data_one < knob["knob_sixteen"] and ui.getFocused(1): 		# check if param entry mode is on and make sure knob is not out of parameter range
 			channels.showGraphEditor(True, self.param_knob, self.pad_step - 60, self.channel)
 																						# bool temporary, long param, long step, long index, (long globalIndex* = 1)			
 			if self.param_knob == pModX or self.param_knob == pModY: 					#long index, long patNum, long step, long param, long value, (long globalIndex = 0)
@@ -198,7 +199,6 @@ class Knob:
 	
 		else:		
 			print('else')
-
 			plugins.setParamValue(Utility.mapvalues(self.data_two, 0, 1, 0, 127), self.selected_track, self.channel)
 			self.event.handled = True
 			
