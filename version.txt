@@ -59,3 +59,6 @@ version info
 	- Undo Up function added which undos repeatedly rather than undo/redo
 	- Menu function added which opens main menus rather than item/sub-menus
 	- bug preventing panning in Channel Rack fixed.
+
+2.03 ---	1/24/23
+	- addressed bug causing some of the buttons not to function

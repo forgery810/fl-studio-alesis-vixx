@@ -28,7 +28,6 @@ class Knob:
 	temp_chan = 0
 	get_track_value = 0	
 
-
 	def __init__(self, event):
 		self.event = event
 		self.pad_offset = 60
@@ -78,7 +77,6 @@ class Knob:
 			self.get_match()
 			self.event.handled = True
 
-
 	def get_match(self):
 		if ui.getFocused(1) and self.selected_track < channels.channelCount():		# Get channel vol if Channels focused and valid channel
 			if Pads.get_mixer_param_index() == 0:	
@@ -98,8 +96,6 @@ class Knob:
 				Knob.get_track_value = mixer.getTrackPan(self.selected_track)
 				self.two_rounded = Utility.mapvalues(self.data_two, -1.0, 1.0, 0, 127)
 			self.check_if_matching()
-
-																										
 
 	def check_if_matching(self):											
 		# Knob must match current value before it engages.

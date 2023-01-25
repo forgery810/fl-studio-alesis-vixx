@@ -1,10 +1,16 @@
 # fl-studio-alesis-vixx
 
+**** 2.03 Update ***
+
+Fixed bug that prevented some of the buttons from functioning
+
+	*********
+
 **** 2.02 Update ****
 
 New Layout for Sustain Pedal
 
-Script Version 2.00 had a conflict between the Sustain Pedal and one of the knobs. To address this the Sustain Pedal must be changed to Channel 2 in the Alesis Layout. New layouts have been added. Another small bug has been fixed and a couple of new functions added. If you don't use Sustain then this update may not be necessary. 
+Script Version 2.00 had a conflict between the Sustain Pedal and one of the knobs. To address this, in 2.02 the Sustain Pedal must be changed to Channel 2 in the Alesis Layout. New layouts have been added. Another small bug has been fixed and a couple of new functions added. If you don't use Sustain then this update may not be necessary. 
 
 	*********
 
