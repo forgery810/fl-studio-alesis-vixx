@@ -1,4 +1,4 @@
-# name=Alesis VIxx-2-02
+# name=Alesis VIxx-2-03
 # Author: ts-forgery
 VERSION = '2.03'
 
