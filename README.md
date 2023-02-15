@@ -1,5 +1,9 @@
 # fl-studio-alesis-vixx
 
+*** Update ***
+
+Layouts for the VI49 and VI25 have been updated as they were set to toggle rather than momentary.
+
 **** 2.03 Update ***
 
 Fixed bug that prevented some of the buttons from functioning
