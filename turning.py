@@ -65,7 +65,7 @@ class Knob:
 		elif Action.get_alt_status() == True: 
 			if Action.get_shift_status() == False:
 				self.selected()
-				self.event.handled = True 
+				self.event.handled = False
 
 		elif Knob.proceed == True and Knob.temp_chan == self.data_one:
 			self.knob_turn()
